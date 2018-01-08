@@ -1,0 +1,42 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+    <ion-buttons end (click)="redirectToPostCreatePage()">
+      <button ion-button icon-only>
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let userPost of userPostList">
+    <ion-item  (click)="postDetail(userPost)">
+      <ion-avatar item-start>
+        <img [src]="userPost.photo" *ngIf="userPost.photo">
+      </ion-avatar>
+      <h1>{{userPost.title}} </h1>
+      <h3>{{userPost.timeStamp | date: 'yyyy/MM/dd H:mm' }}</h3>
+    </ion-item>
+    <ion-card-content  (click)="postDetail(userPost)">
+      <img [src]="userPost.imageUrl" *ngIf="userPost.imageUrl" />
+    </ion-card-content>
+    <ion-row>
+      <ion-col  (click)="postDetail(userPost)">
+        <button ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>{{userPost.commentListSize }} Comments</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center  (click)="setLikes(userPost)">
+        <button ion-button clear small>
+          <ion-icon name="thumbs-up">  </ion-icon>
+          <div>  {{userPost.likes}} likes</div>
+        </button>
+
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+</ion-content>
